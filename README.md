@@ -13,10 +13,25 @@ This project includes the Data Scraping and Analysis using Beautifulsoup and req
 * Windows 10
 * python version 3.8.3
 * pandas 
+```
+pip install pandas
+```
 * beautifulsoup
+```
+pip install bs4
+```
 * requests
+```
+pip install requests
+```
 * Html5lib
+```
+pip install html5lib
+```
 * lxml
+```
+pip install lxml
+```
 * pycharm 
 
 ### Installing
