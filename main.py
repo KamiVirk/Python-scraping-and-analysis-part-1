@@ -5,7 +5,7 @@ import requests
 import pandas as pd
 
 info_dict = {}
-for m in range(11, 12):
+for m in range(1, 12):
     base_url = "https://www.goodreads.com/book/popular_by_date/2021/"
 
     to_scrap = base_url + f"{m}"
