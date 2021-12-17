@@ -4,14 +4,15 @@ from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 
+month = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10 ', '11', '12']
 info_dict = {}
-for m in range(1, 12):
+for m in range(0, 12):
     base_url = "https://www.goodreads.com/book/popular_by_date/2021/"
 
     to_scrap = base_url + f"{m}"
 
     source = requests.get(to_scrap)
-    print(f"Site{m}'s link status : {source.status_code}")
+    print(f"Site{month[m]}'s link status : {source.status_code}")
 
     page_content = source.text
 
