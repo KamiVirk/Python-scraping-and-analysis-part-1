@@ -5,14 +5,14 @@ import requests
 import pandas as pd
 
 month = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10 ', '11', '12']
-
+info_dict = {}
 for m in range(len(month)):
     base_url = "https://www.goodreads.com/book/popular_by_date/2021/"
 
     to_scrap = base_url + str(month[m])
 
     source = requests.get(to_scrap)
-    print(source.status_code)
+    print(f"Site{month[m]}'s link status : {source.status_code}")
 
     page_content = source.text
 
@@ -22,9 +22,6 @@ for m in range(len(month)):
     for a_tag in doc.find_all('a', class_="BookCover BookCover--bottom"):
         links.append(a_tag.get('href'))
 
-    title = []
-    for h_tag in doc.find_all('h3', class_="Text Text__title3 Text__umber"):
-        title.append(h_tag.text)
 
     author = []
     for span_tag in doc.find_all('span', class_="ContributorLink__name"):
@@ -44,10 +41,15 @@ for m in range(len(month)):
         description.append(p_tag.text.strip())
 
     list = []
+    title = []
     for i in range(len(links)):
         source_2 = requests.get(links[i])
+        print(f"Book{i}'s link status : {source_2.status_code}")
         page_content_2 = source_2.text
         doc_2 = BeautifulSoup(page_content_2, 'lxml')
+        for h_tag in doc_2.find_all('h1', class_="gr-h1 gr-h1--serif"):
+            title_ = h_tag.text.strip()
+        title.append(title_)
         try:
             detail_tag = doc_2.find_all('div', class_="clearFloats")
             isb_tag = detail_tag[1].find('span', class_="greyText")
@@ -57,17 +59,13 @@ for m in range(len(month)):
             isbn = "NOT AVAILABLE"
         list.append(isbn)
 
-info_dict = {
-    'title': title,
-    'author': author,
-    'ISBN': list,
-    'rating': rating,
-    'rating count': rating_count,
-    'description': description,
-    'url': links
-
-}
-
-info_df = pd.DataFrame(info_dict)
-info_df.to_csv('file4.csv', index=None)
-
+    info_dict = {
+        'title': title,
+        'author': author,
+        'ISBN': list,
+        'rating': rating,
+        'rating count': rating_count,
+        'url': links
+    }
+    df = pd.DataFrame(info_dict)
+    df.to_csv("File4.csv", mode='a', index=False, header=None)
