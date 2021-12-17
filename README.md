@@ -1,10 +1,11 @@
-# DATA COLLECTION AND ANALYSIS
+# DATA COLLECTION
 
-Basic purpose is to practice python basics.
+Basic purpose is to practice python basics for web scraping.
 
 ## Description
 
-This project includes the Data Scraping and Analysis using Beautifulsoup and requests library.
+This project includes the Data Scraping using Beautifulsoup and requests library. And to append the Data to csv used Panda Library.
+in this project Title of book, author, ISBN, description, stars, rating count and url of the top 15 books of every month's for the last 12 month is scraped. 
 
 ## Getting Started
 
